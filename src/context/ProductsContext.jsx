@@ -1,10 +1,15 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { getProducts, getSingleProduct, getCategories, getProductsByCategory } from "../services/api";
+import { createContext, useContext, useState, useEffect } from "react";
+import {
+  getProducts,
+  getSingleProduct,
+  getCategories,
+  getProductsByCategory,
+} from "../services/api";
 
 export const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]); 
+  const [products, setProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState(null);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
@@ -41,9 +46,8 @@ export const ProductsProvider = ({ children }) => {
       setProducts(response.data);
     } catch (err) {
       setError(err.message || "An error occurred");
-    } 
+    }
   };
-
 
   const fetchSingleProduct = async (productId) => {
     try {
@@ -63,6 +67,7 @@ export const ProductsProvider = ({ children }) => {
         setProducts,
         fetchProductsByCategory,
         fetchSingleProduct,
+        error
       }}
     >
       {children}
@@ -71,11 +76,23 @@ export const ProductsProvider = ({ children }) => {
 };
 
 export const useProducts = () => {
-  const context = useContext(ProductsContext);
+  const {
+    products,
+    singleProduct,
+    categories,
+    setProducts,
+    fetchProductsByCategory,
+    fetchSingleProduct,
+    error
+  } = useContext(ProductsContext);
 
-  if (!context) {
-    throw new Error("useProducts must be used within a ProductsProvider");
-  }
-
-  return context;
+  return {
+    products,
+    singleProduct,
+    categories,
+    setProducts,
+    fetchProductsByCategory,
+    fetchSingleProduct,
+    error
+  };
 };
