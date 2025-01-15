@@ -5,10 +5,10 @@ function Header() {
   const { cart } = useCart();
 
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-base-300 p-0">
       <div className="w-11/12 mx-auto">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-3xl">
+          <Link to="/" className="text-3xl font-bold">
             eCommerce
           </Link>
         </div>
