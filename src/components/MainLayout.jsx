@@ -1,20 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Header from "./Header"
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/cart">Cart</Link>
-          </li>
-        </ul>
-      </nav>
-      <div>{children}</div>
+      <Header />
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 };

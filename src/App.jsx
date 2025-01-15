@@ -10,17 +10,16 @@ import './App.css'
 function App() {
   return (
     <CartProvider>
-      <Router>
-        <MainLayout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="cart" element={<Cart />} />
-          </Routes>
-        </MainLayout>
-      </Router>
-    </CartProvider>
+    <Router>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+      </Routes>
+    </Router>
+  </CartProvider>
   );
 }
 
 export default App;
-
