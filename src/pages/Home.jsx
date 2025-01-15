@@ -8,9 +8,7 @@ function Home() {
   const handleCategorySelect = (category) => {
     fetchProductsByCategory(category);
   };
-
-  console.log(products);
-
+  
   return (
     <div className="flex flex-col w-11/12 mx-auto mt-16">
       <div className="flex gap-5 my-5">

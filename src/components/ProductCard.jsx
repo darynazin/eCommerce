@@ -6,8 +6,6 @@ const ProductCard = ({ product }) => {
   const isInCart = cart.some((item) => item.id === product.id);
   const [quantity, setQuantity] = useState();
 
-  console.log(cart)
-
   useEffect(() => {
     if(isInCart) {
       const itemInCart = cart.find( item => item.id === product.id)
@@ -22,7 +20,7 @@ const ProductCard = ({ product }) => {
         alt={product.title}
         className="h-40 w-full object-contain mb-4 rounded-md"
       />
-      <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+      <h3 className="text-lg font-semibold mb-2 truncate">{product.title}</h3>
       <p className="text-gray-600 mb-4">${product.price}</p>
 
       {isInCart ? (
