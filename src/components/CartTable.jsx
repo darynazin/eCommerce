@@ -4,7 +4,7 @@ const CartTable = () => {
   const { cart, removeFromCart } = useCart();
 
   const totalAmount = cart.reduce(
-    (total, item) => total + item.price * item.quantitiy,
+    (total, item) => total + item.price * item.quantity,
     0
   );
 
