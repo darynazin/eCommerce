@@ -8,9 +8,11 @@ export const getSingleProduct = (productId) =>
 export const getCategories = () => api.get("/products/categories");
 export const getProductsByCategory = (category) =>
   api.get(`/products/category/${category}`);
-export const addCart = (cartData) => api.post("/carts", cartData);
+
+// cart handling via local storage in Context
+/* export const addCart = (cartData) => api.post("/carts", cartData);
 export const updateCart = (cartId, cartData) =>
   api.put(`/carts/${cartId}`, cartData);
 export const patchCart = (cartId, cartData) =>
   api.patch(`/carts/${cartId}`, cartData);
-export const deleteCart = (cartId) => api.delete(`/carts/${cartId}`);
+export const deleteCart = (cartId) => api.delete(`/carts/${cartId}`); */
