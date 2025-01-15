@@ -1,7 +1,9 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 const CartTable = () => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, addToCart, decrementFromCart } = useCart();
 
   const totalAmount = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -32,13 +34,27 @@ const CartTable = () => {
                 />
               </td>
               <td>{item.title}</td>
-              <td>{item.quantity}</td>
+              <td>
+                <button
+                  onClick={() => decrementFromCart(item.id)}
+                  className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
+                >
+                  -
+                </button>
+                <span className="mr-2">{item.quantity}</span>
+                <button
+                  onClick={() => addToCart(item)}
+                  className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
+                >
+                  +
+                </button>
+              </td>
               <td>${item.price.toFixed(2)}</td>
               <td>${(item.price * item.quantity).toFixed(2)}</td>
               <td>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="btn btn-md btn-error"
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-400"
                 >
                   Remove
                 </button>
@@ -52,9 +68,18 @@ const CartTable = () => {
               Total:
             </td>
             <td className="font-bold">${totalAmount.toFixed(2)}</td>
+            <td></td>
           </tr>
         </tfoot>
       </table>
+      <div className="mt-4 text-right">
+        <Link
+          to="/"
+          className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
+        >
+          Continue Shopping
+        </Link>
+      </div>
     </div>
   );
 };
