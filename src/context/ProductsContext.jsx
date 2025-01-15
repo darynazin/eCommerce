@@ -12,8 +12,6 @@ export const ProductsProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
-  console.log(categories)
-
   const fetchCategories = async () => {
     try {
       const response = await getCategories();

@@ -38,12 +38,6 @@ const ProductCard = ({ product }) => {
           >
             +
           </button>
-          <button
-            onClick={() => removeFromCart(product.id)}
-            className="text-red-500 mt-2 block hover:text-red-400"
-          >
-            Remove from Cart
-          </button>
         </div>
       ) : (
         <button
