@@ -12,9 +12,6 @@ function Header() {
           <Link to="/cart">Cart</Link>
         </li>
       </ul>
-      <div>
-        card icon
-      </div>
     </nav>
   );
 }
