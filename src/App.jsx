@@ -4,20 +4,23 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import MainLayout from "./components/MainLayout";
 import { CartProvider } from "./context/CartContext";
+import { ProductsProvider } from "./context/ProductsContext"
 import "./App.css";
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="cart" element={<Cart />} />
-          </Route>
-        </Routes>
-      </Router>
-    </CartProvider>
+    <ProductsProvider>
+      <CartProvider>
+        <Router>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="cart" element={<Cart />} />
+            </Route>
+          </Routes>
+        </Router>
+      </CartProvider>
+    </ProductsProvider>
   );
 }
 
