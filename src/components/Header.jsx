@@ -5,7 +5,7 @@ function Header() {
   const { cart } = useCart();
 
   return (
-    <div className="navbar bg-base-300 p-0">
+    <div className="navbar p-0">
       <div className="w-11/12 mx-auto">
         <div className="flex-1">
           <Link to="/" className="text-3xl font-bold">
@@ -14,11 +14,11 @@ function Header() {
         </div>
         <div className="flex-none">
           <Link to="/cart">
-          <div role="button" className="btn btn-ghost btn-circle">
+          <div role="button" className="btn btn-ghost btn-circle bg-[#374151] text-white">
                 <div className="indicator">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7"
+                    className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
