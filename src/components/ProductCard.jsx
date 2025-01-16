@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const ProductCard = ({ product }) => {
   const { cart, addToCart, removeFromCart } = useCart();
   const isInCart = cart.some((item) => item.id === product.id);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(0); // Kept feature branch's default value for quantity
 
   useEffect(() => {
     if (isInCart) {
@@ -20,7 +20,9 @@ const ProductCard = ({ product }) => {
         alt={product.title}
         className="h-40 w-full object-contain mb-4 rounded-md"
       />
-      <h3 className="text-lg font-semibold mb-2 text-center">{product.title}</h3>
+      <h3 className="text-lg font-semibold mb-2 text-center truncate">
+        {product.title}
+      </h3>
       <p className="text-gray-600 mb-4 text-center">${product.price}</p>
 
       <div className="mt-auto">
