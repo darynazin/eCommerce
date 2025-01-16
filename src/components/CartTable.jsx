@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 const CartTable = () => {
-  const { cart, removeFromCart, addToCart, decrementFromCart, clearCart } =
+  const { cart, decrementInCart, addToCart, clearCart, removeFromCart } =
     useCart();
   const [showCheckoutPopup, setShowCheckoutPopup] = useState(false);
 
@@ -61,7 +61,7 @@ const CartTable = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => decrementFromCart(item)}
+                    onClick={() => decrementInCart(item.id)}
                     className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
                   >
                     -
