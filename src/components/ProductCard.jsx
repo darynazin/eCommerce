@@ -2,7 +2,7 @@ import { useCart } from "../context/CartContext";
 import { useState, useEffect } from "react";
 
 const ProductCard = ({ product }) => {
-  const { cart, addToCart, removeFromCart } = useCart();
+  const { cart, addToCart, decrementInCart } = useCart();
   const isInCart = cart.some((item) => item.id === product.id);
   const [quantity, setQuantity] = useState(0);
 
@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
         {isInCart ? (
           <div className="flex items-center space-x-2">
             <button
-              onClick={() => removeFromCart(product.id)}
+              onClick={() => decrementInCart(product.id)}
               className="bg-gray-700 text-white px-3 py-2 rounded-md hover:bg-gray-600"
             >
               -

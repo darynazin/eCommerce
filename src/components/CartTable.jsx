@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 import { useProducts } from "../context/ProductsContext";
 
 const CartTable = () => {
-  const { cart, removeFromCart, addToCart, decrementFromCart, clearCart } =
+  const { cart, decrementInCart, addToCart, clearCart, removeFromCart } =
     useCart();
   const { fetchProductsByCategory, fetchProducts } = useProducts();
   const [showCheckoutPopup, setShowCheckoutPopup] = useState(false);
@@ -65,7 +65,7 @@ const CartTable = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => decrementInCart(item.id)}
                     className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
                   >
                     -
@@ -81,12 +81,12 @@ const CartTable = () => {
                 <td>${item.price.toFixed(2)}</td>
                 <td>${(item.price * item.quantity).toFixed(2)}</td>
                 <td>
-                  {/* <button
-                    onClick={() => removeAllFromCart(item.id)}
+                  <button
+                    onClick={() => removeFromCart(item.id)}
                     className="bg-red-500 text-white p-2 rounded-md hover:bg-red-400"
                   >
                     Remove
-                  </button> */}
+                  </button>
                 </td>
               </tr>
             ))}
