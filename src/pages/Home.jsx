@@ -18,13 +18,13 @@ function Home() {
   };
   
   return (
-    <div className="flex flex-col w-11/12 mx-auto mt-16">
-      <div className="flex gap-5 my-5">
+    <div className="flex flex-col w-11/12 mx-auto">
+      <div className="flex my-10 bg-[#f2f2f2] w-fit mx-auto rounded-lg">
       {categories.map(category => (
         <button
         key={category}
-        className={`btn btn-outline btn-secondary ${
-          activeCategory === category ? "btn-active" : ""
+        className={`btn ${
+          activeCategory === category ? "btn-primary" : ""
         }`}
         onClick={() => handleCategorySelect(category)}
       >
