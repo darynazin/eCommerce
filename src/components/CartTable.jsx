@@ -30,12 +30,12 @@ const CartTable = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th>Image</th>
-              <th>Name</th>
+              <th></th>
+              <th>Product</th>
               <th>Quantity</th>
               <th>Price</th>
-              <th>Total</th>
-              <th>Action</th>
+              <th>Line Total</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -45,10 +45,20 @@ const CartTable = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-16 h-16 object-cover"
+                    className="w-24 h-24 object-cover"
                   />
                 </td>
-                <td>{item.title}</td>
+                <td>
+                  <div className="max-w-[300px] break-words overflow-hidden text-ellipsis">
+                    {item.title}
+                  </div>
+                  <Link
+                    to={`/?category=${item.category}`}
+                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2"
+                  >
+                    {item.category}
+                  </Link>
+                </td>
                 <td>
                   <button
                     onClick={() => decrementFromCart(item)}
@@ -97,11 +107,11 @@ const CartTable = () => {
       </div>
       {showCheckoutPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-md">
+          <div className="bg-white p-4 rounded-md items-center justify-center">
             <p className="mb-4">Checkout was successful!</p>
             <button
               onClick={handleClosePopup}
-              className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800 items-center justify-center"
+              className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
             >
               Close
             </button>
@@ -111,5 +121,4 @@ const CartTable = () => {
     </div>
   );
 };
-
 export default CartTable;

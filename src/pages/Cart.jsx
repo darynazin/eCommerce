@@ -23,9 +23,9 @@ function Cart() {
     );
   }
   return (
-    <div className="container mx-auto p-2">
-      <h3 className="text-xl font-bold mb-6 text-center">
-        Your Shopping Bag 🛍️
+    <div className="container mt-8 mx-auto p-2">
+      <h3 className="text-xl font-bold mb-8 text-center">
+        Your Shopping Cart 🛒
       </h3>
       <CartTable />
     </div>
