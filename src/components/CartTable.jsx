@@ -28,8 +28,8 @@ const CartTable = () => {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex flex-col container mx-auto px-2">
+    <div className="flex flex-col h-full mb-36">
+      <div className="flex container mx-auto px-2 gap-8">
         <table className="table table-zebra w-full">
           <thead>
             <tr>
@@ -48,7 +48,7 @@ const CartTable = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-24 h-24 object-cover"
+                    className="rounded-md border-2 border-white w-24 h-24 object-cover"
                   />
                 </td>
                 <td>
@@ -57,7 +57,7 @@ const CartTable = () => {
                   </div>
                   <button
                     onClick={() => handleCategoryClick(item.category)}
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2"
+                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mt-2"
                   >
                     {item.category}
                   </button>
@@ -91,19 +91,25 @@ const CartTable = () => {
             ))}
           </tbody>
         </table>
+
+        <div className="mt-4 flex justify-start ml-auto min-w-44">
+          <div className="p-4 flex flex-col">
+            <div className="flex flex-col items-center justify-between mb-2">
+              <span className="text-xl font-bold">
+                Total: ${totalAmount.toFixed(2)}
+              </span>
+              <span className="text-xs">VAT included</span>
+            </div>
+            <button
+              onClick={handleCheckout}
+              className="btn bg-slate-950 mt-2 hover:bg-slate-800"
+            >
+              Checkout
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="mt-8 flex flex-col items-center">
-        <span className="text-xl font-bold mb-2">
-          Total: ${totalAmount.toFixed(2)}
-        </span>
-        <span className="text-sm mb-4">VAT included</span>
-        <button
-          onClick={handleCheckout}
-          className="bg-slate-950 text-white px-6 py-3 rounded-md hover:bg-slate-800 text-lg mb-20"
-        >
-          Checkout
-        </button>
-      </div>
+
       {showCheckoutPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-4 rounded-md flex flex-col items-center">
