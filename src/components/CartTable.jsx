@@ -6,8 +6,9 @@ import { useProducts } from "../context/ProductsContext";
 const CartTable = () => {
   const { cart, removeFromCart, addToCart, decrementFromCart, clearCart } =
     useCart();
-  const { fetchProductsByCategory } = useProducts();
+  const { fetchProductsByCategory, fetchProducts } = useProducts();
   const [showCheckoutPopup, setShowCheckoutPopup] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
   const navigate = useNavigate();
 
   const totalAmount = cart.reduce(
@@ -22,7 +23,7 @@ const CartTable = () => {
     clearCart();
   };
 
-  const handleCategoryClick = (category) => {
+  const handleCategorySelect = (category) => {
     fetchProductsByCategory(category);
     navigate(`/?category=${category}`);
   };
@@ -48,7 +49,7 @@ const CartTable = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="rounded-md border-2 border-white w-24 h-24 object-cover"
+                    className="rounded-md border-2 border-white w-36 h-32 object-cover"
                   />
                 </td>
                 <td>
@@ -56,7 +57,7 @@ const CartTable = () => {
                     {item.title}
                   </div>
                   <button
-                    onClick={() => handleCategoryClick(item.category)}
+                    onClick={() => handleCategorySelect(item.category)}
                     className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mt-2"
                   >
                     {item.category}
@@ -64,7 +65,7 @@ const CartTable = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => decrementFromCart(item)}
+                    onClick={() => removeFromCart(item.id)}
                     className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
                   >
                     -
@@ -80,18 +81,18 @@ const CartTable = () => {
                 <td>${item.price.toFixed(2)}</td>
                 <td>${(item.price * item.quantity).toFixed(2)}</td>
                 <td>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
+                  {/* <button
+                    onClick={() => removeAllFromCart(item.id)}
                     className="bg-red-500 text-white p-2 rounded-md hover:bg-red-400"
                   >
                     Remove
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-
+        <hr className="border-t border-rose-600 my-4" />
         <div className="mt-4 flex justify-start ml-auto min-w-44">
           <div className="p-4 flex flex-col">
             <div className="flex flex-col items-center justify-between mb-2">
