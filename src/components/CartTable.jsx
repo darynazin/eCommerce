@@ -1,32 +1,36 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useProducts } from "../context/ProductsContext";
 
 const CartTable = () => {
-  const { cart, removeFromCart, addToCart, decrementFromCart, clearCart } =
+  const { cart, decrementInCart, addToCart, clearCart, removeFromCart } =
     useCart();
+  const { fetchProductsByCategory, fetchProducts } = useProducts();
   const [showCheckoutPopup, setShowCheckoutPopup] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const navigate = useNavigate();
 
   const totalAmount = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  const handleCheckout = () => {
-    setShowCheckoutPopup(true);
-  };
+  const handleCheckout = () => setShowCheckoutPopup(true);
 
   const handleClosePopup = () => {
     setShowCheckoutPopup(false);
-    clearCart(); // Clear the cart when closing the popup
+    clearCart();
+  };
+
+  const handleCategorySelect = (category) => {
+    fetchProductsByCategory(category);
+    navigate(`/?category=${category}`);
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div
-        className="overflow-x-auto flex-grow"
-        style={{ maxHeight: "calc(100vh - 200px)" }}
-      >
+    <div className="flex flex-col h-full mb-36">
+      <div className="flex container mx-auto px-2 gap-8">
         <table className="table table-zebra w-full">
           <thead>
             <tr>
@@ -45,28 +49,28 @@ const CartTable = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-24 h-24 object-cover"
+                    className="rounded-md border-2 border-white w-36 h-32 object-cover"
                   />
                 </td>
                 <td>
                   <div className="max-w-[300px] break-words overflow-hidden text-ellipsis">
                     {item.title}
                   </div>
-                  <Link
-                    to={`/?category=${item.category}`}
-                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2"
+                  <button
+                    onClick={() => handleCategorySelect(item.category)}
+                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mt-2"
                   >
                     {item.category}
-                  </Link>
+                  </button>
                 </td>
                 <td>
                   <button
-                    onClick={() => decrementFromCart(item)}
+                    onClick={() => decrementInCart(item.id)}
                     className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
                   >
                     -
                   </button>
-                  <span className="m-4">{item.quantity}</span>
+                  <span className="m-2">{item.quantity}</span>
                   <button
                     onClick={() => addToCart(item)}
                     className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
@@ -88,37 +92,42 @@ const CartTable = () => {
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="mt-4 flex justify-between items-center">
-        <Link to="/" className="btn btn-seconday text-black p-2 rounded-md">
-          Continue Shopping
-        </Link>
-        <div className="flex items-center">
-          <span className="text-xl font-bold mr-4">
-            Total: ${totalAmount.toFixed(2)}
-          </span>
-          <button
-            onClick={handleCheckout}
-            className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
-          >
-            Checkout
-          </button>
+        <hr className="border-t border-rose-600 my-4" />
+        <div className="mt-4 flex justify-start ml-auto min-w-44">
+          <div className="p-4 flex flex-col">
+            <div className="flex flex-col items-center justify-between mb-2">
+              <span className="text-xl font-bold">
+                Total: ${totalAmount.toFixed(2)}
+              </span>
+              <span className="text-xs">VAT included</span>
+            </div>
+            <button
+              onClick={handleCheckout}
+              className="btn bg-slate-950 mt-2 hover:bg-slate-800"
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
+
       {showCheckoutPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-md items-center justify-center">
+          <div className="bg-white p-4 rounded-md flex flex-col items-center">
             <p className="mb-4">Checkout was successful!</p>
-            <button
-              onClick={handleClosePopup}
-              className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
-            >
-              Close
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={handleClosePopup}
+                className="bg-slate-950 text-white p-2 rounded-md hover:bg-slate-800"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
     </div>
   );
 };
+
 export default CartTable;
