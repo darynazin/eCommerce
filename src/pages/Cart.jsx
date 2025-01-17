@@ -11,7 +11,7 @@ function Cart() {
         <div className="card-body items-center text-center">
           <h2 className="card-title text-2xl">Your cart is empty!</h2>
           <p className="text-base-content pl-1">
-            Add some products to make your cart happy.
+            Add some products to make your cart happy. 😊
           </p>
           <div className="card-actions justify-center">
             <Link to="/" className="btn btn-neutral btn-md">
