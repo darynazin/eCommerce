@@ -4,11 +4,10 @@ import { useCart } from "../context/CartContext";
 import { useProducts } from "../context/ProductsContext";
 
 const CartTable = () => {
-  const { cart, decrementInCart, addToCart, clearCart, removeFromCart } =
+  const { cart, decrementInCart, addToCart, clearCart, removeFromCart} =
     useCart();
-  const { fetchProductsByCategory, fetchProducts } = useProducts();
+  const { fetchProductsByCategory, setActiveCategory } = useProducts();
   const [showCheckoutPopup, setShowCheckoutPopup] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(null);
   const navigate = useNavigate();
 
   const totalAmount = cart.reduce(
@@ -26,6 +25,7 @@ const CartTable = () => {
   const handleCategorySelect = (category) => {
     fetchProductsByCategory(category);
     navigate(`/?category=${category}`);
+    setActiveCategory(category)
   };
 
   return (
