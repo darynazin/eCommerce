@@ -103,7 +103,7 @@ const CartTable = () => {
             </div>
             <button
               onClick={handleCheckout}
-              className="btn bg-slate-950 mt-2 hover:bg-slate-800"
+              className="btn text-white bg-slate-950 mt-2 hover:bg-slate-800"
             >
               Checkout
             </button>
