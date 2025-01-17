@@ -11,6 +11,7 @@ export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
+  const [activeCategory, setActiveCategory] = useState();
 
   const fetchCategories = async () => {
     try {
@@ -54,7 +55,9 @@ export const ProductsProvider = ({ children }) => {
         fetchProductsByCategory,
         fetchProducts,
         categories,
-        error
+        error,
+        activeCategory,
+        setActiveCategory
       }}
     >
       {children}
@@ -68,7 +71,9 @@ export const useProducts = () => {
     fetchProductsByCategory,
     fetchProducts,
     categories,
-    error
+    error,
+    activeCategory,
+    setActiveCategory
   } = useContext(ProductsContext);
 
   return {
@@ -76,6 +81,8 @@ export const useProducts = () => {
     fetchProductsByCategory,
     fetchProducts,
     categories,
-    error
+    error,
+    activeCategory,
+    setActiveCategory
   };
 };
