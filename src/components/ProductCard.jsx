@@ -20,8 +20,8 @@ const ProductCard = ({ product }) => {
         alt={product.title}
         className="h-40 w-full object-contain mb-4 rounded-md"
       />
-      <h3 className="text-lg font-semibold mb-2 text-center">{product.title}</h3>
-      <p className="text-gray-600 mb-4 text-center">${product.price}</p>
+      <h3 className="text-lg font-semibold mb-2 truncate">{product.title}</h3>
+      <p className="text-gray-600 mb-4">${product.price}</p>
 
       <div className="flex justify-center items-center mt-auto space-x-2">
         {isInCart ? (

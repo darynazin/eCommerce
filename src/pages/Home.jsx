@@ -18,8 +18,8 @@ function Home() {
   };
   
   return (
-    <div className="flex flex-col w-11/12 mx-auto">
-      <div className="flex my-10 bg-[#f2f2f2] w-fit mx-auto rounded-lg">
+    <div className="flex flex-col w-10/12 mx-auto">
+      <div className="flex my-24 bg-[#f2f2f2] w-fit mx-auto rounded-lg">
       {categories.map(category => (
         <button
         key={category}
@@ -38,7 +38,7 @@ function Home() {
         </div>
       )}
       
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-32">
         {products.map((product) => 
         <ProductCard key={product.id} product={product} />
         )}
