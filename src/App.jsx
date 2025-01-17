@@ -1,26 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Cart from './components/Cart';
-import MainLayout from './components/MainLayout';
-import { CartProvider } from './context/CartContext';
-import './App.css'
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import MainLayout from "./components/MainLayout";
+import { CartProvider } from "./context/CartContext";
+import { ProductsProvider } from "./context/ProductsContext"
+import "./App.css";
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <MainLayout>
+    <ProductsProvider>
+      <CartProvider>
+        <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="cart" element={<Cart />} />
+            <Route element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="cart" element={<Cart />} />
+            </Route>
           </Routes>
-        </MainLayout>
-      </Router>
-    </CartProvider>
+        </Router>
+      </CartProvider>
+    </ProductsProvider>
   );
 }
 
 export default App;
-
